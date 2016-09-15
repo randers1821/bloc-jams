@@ -33,7 +33,6 @@ var albumMarconi = {
 var createSongRow = function(songNumber, songName, songLength){
     var template = 
         '<tr class="album-view-song-item">'
-    +       '<td class="song-item-number">' + songNumber + '</td>'
     +       '<td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
     +       '<td class="song-item-title">' + songName + '</td>'
     +       '<td class="song-item-duration">' + songLength + '</td>'
@@ -69,7 +68,15 @@ var findParentByClassName = function(element, targetClass) {
         while(currentParent.className != targetClass && currentParent.className !== null) {
             currentParent = currentParent.parentElement;
         }
- 
+    }
+    if(currentParent == null) {
+        alert("No parent found");
+    }else if(currentParent.className == null) {
+        alert("No parent found with that class name");
+    }
+    return currentParent;
+}
+    
     
     
   
@@ -98,13 +105,13 @@ var clickHandler = function(targetElement) {
     var songItem = getSongItem(targetElement);
     
     if (currentlyPlayingSong == null) {
-        songItem.innerHTML = pausebuttonTemplate 
+        songItem.innerHTML = pauseButtonTemplate 
         currentlyPlayingSong = songItem.getAttribute('data-song-number');
         } else if (currentlyPlayingSong == songItem.getAttribute('data-song-number')) {
         songItem.innerHTML = playButtonTemplate;
         currentlyPlayingSong = null;
         } else if (currentlyPlayingSong != songItem.getAttribute('data-song-number')) {
-            var currentlyPlaySongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
+            var currentlyPlayingSongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
         currentlyPlayingSongElement.innerHTML = currentlyPlayingSongElement.getAttribute('data-song-number');
         songItem.innerHTML = pauseButtonTemplate;
         currentlyPlayingSong = songItem.getAttribute('data-song-number');
@@ -129,7 +136,7 @@ window.onload = function() {
             
         var songItem = getSongItem(event.target);
             
-            if(song.Item.getAttribute('data-song-number') !== currentlyPlayingSong) {
+            if(songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
                 songItem.innerHTML = playButtonTemplate;
             }
         }
@@ -149,4 +156,5 @@ window.onload = function() {
         songRows[i].addEventListener('click', function(event) {
             clickHandler(event.target);
         });
-    };
+    }
+};
