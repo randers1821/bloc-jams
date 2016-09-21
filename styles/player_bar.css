@@ -52,6 +52,9 @@
     width: 50%;
     text-align: center;
     position: relative;
+    margin-top: 17%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .player-bar .currently-playing .song-name,
