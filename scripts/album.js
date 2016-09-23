@@ -230,11 +230,28 @@ var updatePlayerBarSong = function() {
 };
 
 
+var controls = ('.main-controls .play-pause');
+
+var togglePlayFromPlayerBar = function() {
+    
+    if(currentlyPlayingSongNumber == pauseButtonTemplate && playerBarPlayButton.click) {
+        getSongNumberCell = pauseButtonTemplate;
+        playerBarPlayButton.html(playerBarPauseBUtton);
+        currentlyPlayingSong.play();
+    }
+    
+    if(currentlyPlayingSong = currentSoundFile && playerBarPauseButton.click) {
+        getSongNumberCell = playButtonTemplate;
+        playerBarPauseButton.html(playerBarPlayButton);
+        currentlyPlayingSong.pause();
+    }
+}
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    togglePlayFromPlayerBar.click(controls);
     
 });
 
